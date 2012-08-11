@@ -18,12 +18,12 @@ class Viewer
 	{
 		ob_start();
 		if(false === @include_once(ANOTE_ROOT . '/view/' . $templateName . '.php')) {
-			throw new \Exception('Template file is not found.');
+			throw new \InvalidArgumentException('Template file is not found.');
 		}
 
 		$this->_content = ob_get_clean();
 		if (false === @include_once(ANOTE_ROOT . '/view/layout/' . $this->layout . '.php')) {
-			throw new \Exception('Layout file is not found.');
+			throw new \InvalidArgumentException('Layout file is not found.');
 		}
 		exit;
 	}
