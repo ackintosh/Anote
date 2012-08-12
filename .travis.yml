@@ -1,7 +1,4 @@
 language: php
-
 php:
   - 5.3
-
-script: cd ./anote/test
-phpunit --coverage-text
+script: sh testrunner.sh
