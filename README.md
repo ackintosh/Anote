@@ -1,4 +1,5 @@
-Anote
+Anote  
+[![Build Status](https://secure.travis-ci.org/ackintosh/Anote.png?branch=master)](http://travis-ci.org/ackintosh/Anote)  
 =====
 
 Anote(アノート)  
