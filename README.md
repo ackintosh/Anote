@@ -40,6 +40,13 @@ anote/view/test.php
   
 が実行されます。  
 #メモ書き
+- twitter bootstrap v2.0.4 を使用しています。
 - mod_headersが有効な場合、リクエストを受け取った時刻とヘッダを送り出した時間との差を  
 X-Runtimeヘッダとして送出します。(単位：マイクロ秒)  
 [http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html](http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html)
+- ORMライブラリとしてphp-activerecord v1.0 を使用しています。  
+[http://www.phpactiverecord.org/](http://www.phpactiverecord.org/)  
+AnoteCore.php で下記のように利用してください。  
+
+    $user = \User::find(1);
+
