@@ -4,3 +4,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php?anote_path=$1 [QSA,L]
 </IfModule>
+<IfModule mod_headers.c>
+    Header append X-Runtime "%D"
+</IfModule>

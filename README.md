@@ -1,12 +1,11 @@
 #Anote  
-
 [![Build Status](https://secure.travis-ci.org/ackintosh/Anote.png?branch=master)](http://travis-ci.org/ackintosh/Anote)  
 =====
 
 Anote(アノート)  
 PHPで作ったWebアプリケーションフレームワークです。  
-アノテーションを使って何かやりたいと思ったのと、フレームワークの習作を兼ねて作りはじめました。	
-フルスタックにまで発展させるつもりはなく、興味の向くままに拡張していきたいと思っています。	
+アノテーションを使って何かやりたいと思ったのと、フレームワークの習作を兼ねて作りはじめました。  
+シンプルなフレームワークを目指しています。
 
 #ライセンス
 GPL v3  
@@ -30,7 +29,7 @@ AnoteCore.php
         $this->viewer->content = 'Hello, Anote !!';
     }
 
-上記の場合、http://xxx.com/test.html にアクセスしたときに  
+上記の場合、http://example.com/test.html にアクセスしたときに  
 
 * コントローラ
 AnoteCore::hoge()  
@@ -40,3 +39,7 @@ anote/view/layout/default.php
 anote/view/test.php  
   
 が実行されます。  
+#メモ書き
+- mod_headersが有効な場合、リクエストを受け取った時刻とヘッダを送り出した時間との差を  
+X-Runtimeヘッダとして送出します。(単位：マイクロ秒)  
+[http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html](http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html)
