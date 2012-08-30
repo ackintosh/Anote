@@ -1,4 +1,7 @@
 language: php
 php:
   - 5.3
-script: sh testrunner.sh
+  - 5.4
+script:
+  - cd ./anote/test
+  - ./phpunit --coverage-text
