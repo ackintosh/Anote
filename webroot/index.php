@@ -26,6 +26,15 @@ ActiveRecord\Config::initialize(function($cfg)
 	$cfg->set_default_connection('development');
 });
 
+
+if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+	header_register_callback(function(){
+		foreach (headers_list() as $header) {
+			if (strpos($header, 'X-Powered-By:') !== false) header_remove('X-Powered-By');
+		}
+	});
+}
+
 FrontController::go();
 
 
