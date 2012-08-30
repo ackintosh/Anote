@@ -1,5 +1,8 @@
 #Anote  
+
+The build status of the current master branch is tracked by Travis CI:
 [![Build Status](https://secure.travis-ci.org/ackintosh/Anote.png?branch=master)](http://travis-ci.org/ackintosh/Anote)  
+
 =====
 
 Anote(アノート)  
@@ -44,6 +47,7 @@ anote/view/test.php
 - mod_headersが有効な場合、リクエストを受け取った時刻とヘッダを送り出した時間との差を  
 X-Runtimeヘッダとして送出します。(単位：マイクロ秒)  
 [http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html](http://httpd.apache.org/docs/2.2/ja/mod/mod_headers.html)
+- PHP5.4以上の環境では、X-Powered-Byヘッダを送出しません。
 - ORMライブラリとしてphp-activerecord v1.0 を使用しています。  
 [http://www.phpactiverecord.org/](http://www.phpactiverecord.org/)  
 AnoteCore.php で下記のように利用してください。  
