@@ -51,6 +51,6 @@ X-Runtimeヘッダとして送出します。(単位：マイクロ秒)
 - ORMライブラリとしてphp-activerecord v1.0 を使用しています。  
 [http://www.phpactiverecord.org/](http://www.phpactiverecord.org/)  
 AnoteCore.php で下記のように利用してください。  
-
     $user = \User::find(1);
-
+- YAMLパーサーとしてspyc v0.4.5を使用しています。  
+[https://github.com/tekimaki/spyc](https://github.com/tekimaki/spyc)

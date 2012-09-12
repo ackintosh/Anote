@@ -1,0 +1,20 @@
+development: 
+  dbtype: mysql
+  user: root
+  password: root
+  host: localhost
+  dbname: active_record
+
+production:
+  dbtype: mysql
+  user: 
+  password: 
+  host: 
+  dbname: 
+
+test:
+  dbtype: mysql
+  user: 
+  password: 
+  host: 
+  dbname: 
