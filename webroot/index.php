@@ -5,6 +5,7 @@
 use anote\library\Autoloader;
 use anote\library\ConfigManager;
 use anote\library\Dispatcher;
+use anote\library\FrontController;
 
 define('ROOT', realpath(dirname(__FILE__) . '/../'));
 define('ANOTE_ROOT', ROOT . '/anote');
@@ -36,24 +37,3 @@ if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
 }
 
 FrontController::go();
-
-
-class FrontController
-{
-	public static function go()
-	{
-		self::_init();
-		$dispatcher = new Dispatcher($_GET);
-		$dispatcher->boot();
-	}
-
-	private static function _init()
-	{
-		ini_set('default_charset', 'utf-8');
-		ini_set('mbstring.script_encoding', 'utf-8');
-		ini_set('mbstring.internal_encoding', 'utf-8');
-		ini_set('mbstring.substitute_character', '?');
-		ini_set('mbstring.http_input' , 'pass');
-		ini_set('mbstring.http_output' , 'pass');
-	}
-}
