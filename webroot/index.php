@@ -6,15 +6,15 @@ use anote\library\Autoloader;
 use anote\library\ConfigManager;
 use anote\library\Dispatcher;
 
-define('ROOT', realpath(dirname(__FILE__) . '/../') . '/');
-define('ANOTE_ROOT', ROOT . 'anote/');
-define('WEB_ROOT', ROOT . 'webroot/');
+define('ROOT', realpath(dirname(__FILE__) . '/../'));
+define('ANOTE_ROOT', ROOT . '/anote');
+define('WEB_ROOT', ROOT . '/webroot');
 
-require_once(ANOTE_ROOT . 'library/Autoloader.php');
+require_once(ANOTE_ROOT . '/library/Autoloader.php');
 $autoloader = new Autoloader();
 $autoloader->register(array($autoloader, 'load'));
 
-require_once ANOTE_ROOT . 'library/vendor/php-activerecord/ActiveRecord.php';
+require_once ANOTE_ROOT . '/library/vendor/php-activerecord/ActiveRecord.php';
 ActiveRecord\Config::initialize(function($cfg)
 {
 	$array_connections = array();
@@ -22,7 +22,7 @@ ActiveRecord\Config::initialize(function($cfg)
 		$array_connections[$env] = "{$cnf['dbtype']}://{$cnf['user']}:{$cnf['password']}@{$cnf['host']}/{$cnf['dbname']}";
 	}
 
-	$cfg->set_model_directory(ANOTE_ROOT . 'model');
+	$cfg->set_model_directory(ANOTE_ROOT . '/model');
 	$cfg->set_connections($array_connections);
 	$cfg->set_default_connection('development');
 });

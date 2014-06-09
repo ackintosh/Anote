@@ -15,7 +15,7 @@ class Autoloader
 	public function load($className)
 	{
 		$paths = explode('\\', $className);
-		$includeFile = ROOT . implode('/', $paths) . '.php';
+		$includeFile = ROOT . '/' . implode('/', $paths) . '.php';
 
 		if (is_readable($includeFile)) {
 			require_once($includeFile);
