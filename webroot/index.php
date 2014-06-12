@@ -6,6 +6,7 @@ use anote\library\Autoloader;
 use anote\library\ConfigManager;
 use anote\library\Dispatcher;
 use anote\library\FrontController;
+use anote\library\AnotationParser;
 
 define('ROOT', realpath(dirname(__FILE__) . '/../'));
 define('ANOTE_ROOT', ROOT . '/anote');
@@ -36,4 +37,4 @@ if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
 	});
 }
 
-FrontController::go();
+FrontController::act($_GET);

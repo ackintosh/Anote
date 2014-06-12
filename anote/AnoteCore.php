@@ -35,7 +35,7 @@ class AnoteCore
 	}
 
 	/**
-	 * @anoteURL(/test.html)
+	 * @anoteURL(/test)
 	 * @anoteLayout(default)
 	 */
 	public function test()
