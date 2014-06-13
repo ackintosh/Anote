@@ -11,16 +11,16 @@ require_once '../AnoteCore.php';
 
 class AnoteCoreTest extends \PHPUnit_Framework_TestCase
 {
-	private $request = array('anote_path' => 'index');
+    private $request = array('anote_path' => 'index');
 
-	protected function setUp()
-	{
-		$this->anoteCore = new \anote\AnoteCore($this->request);
-		$this->assertSame('anote\AnoteCore', get_class($this->anoteCore));
-		$this->assertSame('anote\library\Viewer', get_class($this->anoteCore->viewer));
-	}
+    protected function setUp()
+    {
+        $this->anoteCore = new \anote\AnoteCore($this->request);
+        $this->assertSame('anote\AnoteCore', get_class($this->anoteCore));
+        $this->assertSame('anote\library\Viewer', get_class($this->anoteCore->viewer));
+    }
 
-	public function testIndex()
-	{
-	}
+    public function testIndex()
+    {
+    }
 }
