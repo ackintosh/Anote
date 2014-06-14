@@ -8,10 +8,17 @@ namespace Anote\Library;
 class Viewer
 {
     private $_content;
+    private $layout;
 
     public function __construct()
     {
 
+    }
+
+    public function setLayout($layout)
+    {
+        $layout->setLayoutRootPath(ANOTE_ROOT . '/view/layout');
+        $this->layout = $layout;
     }
 
     public function render($templateName)
@@ -22,7 +29,7 @@ class Viewer
         }
 
         $this->_content = ob_get_clean();
-        if (false === @include_once(ANOTE_ROOT . '/view/layout/' . $this->layout . '.php')) {
+        if (false === @include_once($this->layout->getFullPath())) {
             throw new \InvalidArgumentException('Layout file is not found.');
         }
         exit;

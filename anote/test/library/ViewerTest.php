@@ -1,5 +1,6 @@
 <?php
 namespace Anote\Library;
+use Anote\Library\Layout;
 /**
  * Page Viewer Test
  * @package Test
@@ -29,7 +30,7 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLayoutNotFound()
     {
-        $this->viewer->layout = 'layout_does_not_exist';
+        $this->viewer->setLayout(new Layout('layout_does_not_exist'));
         $this->viewer->render('index');
     }
 }

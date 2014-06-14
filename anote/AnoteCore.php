@@ -20,15 +20,6 @@ class AnoteCore extends Core
     }
 
     /**
-     * A function for 404 error page.
-     * @anoteLayout(default)
-     */
-    public function anote404()
-    {
-        header('HTTP/1.0 404 Not Found');
-    }
-
-    /**
      * @anoteURL(/test)
      * @anoteLayout(default)
      */

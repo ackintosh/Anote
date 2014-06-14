@@ -3,6 +3,9 @@ namespace Anote\Library;
 use Anote\AnoteCore;
 use Anote\Library\Request\Get;
 use Anote\Library\Viewer;
+use Anote\Library\Layout;
+use Anote\Library\RoutingTable;
+use Anote\Library\Exception\RouteNotFoundException;
 /**
  * Request Dispatcher
  * @package Library
@@ -26,36 +29,20 @@ class Dispatcher
     {
         try {
             $core = new AnoteCore();
+            $routingTable = new RoutingTable($core);
+            $route = $routingTable->getRoute($this->anote_path);
+            $func = $route->getMethodName();
+
             $core->get = new Get($this->get);
             $core->viewer = new Viewer;
-            $func = $this->getCoreFunction($core);
-            $core->viewer->layout = $this->getCoreLayout($core, $func);
+            $core->viewer->setLayout(new Layout(AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func))));
             $core->$func();
             $core->viewer->render($func);
+        } catch (RouteNotFoundException $e) {
+            header('HTTP/1.0 404 Not Found');
+            exit;
         } catch (\Exception $e) {
             echo $e->getMessage();
-        }
-    }
-
-    private function getCoreFunction($core)
-    {
-        foreach (Reflection::getMethods($core) as $method) {
-            if ($this->anote_path === AnotationParser::anoteURL($method->getDocComment())) {
-                return $method->name;
-            }
-        }
-
-        /* diaplay 404 error */
-        return 'anote404';
-    }
-
-    private function getCoreLayout($core, $func)
-    {
-        $layoutName = AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func));
-        if (empty($layoutName)) {
-            throw new \Exception('Setting the layout is not defined.');
-        } else {
-            return $layoutName;
         }
     }
 
