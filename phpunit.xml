@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit stopOnError="true"
+         stopOnFailure="true"
+         colors="true"
+         bootstrap="Anote/test/phpunit_bootstrap.php">
+	<testsuites>
+		<testsuite name="Core Test Suite">
+            <directory>Anote/test</directory>
+		</testsuite>
+	</testsuites>
+  <logging>
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+    <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+  </logging>
+</phpunit>

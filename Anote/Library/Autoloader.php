@@ -5,6 +5,9 @@ namespace Anote\Library;
  * @package Library
  */
 
+/**
+ * @codeCoverageIgnore
+ */
 class Autoloader
 {
     private $rootPath;

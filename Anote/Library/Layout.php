@@ -16,13 +16,13 @@ class Layout
         $this->layoutRootPath = $path;
     }
 
-    public function isFileExists()
-    {
-        return file_exists($this->getFullPath());
-    }
-
     public function getFullPath()
     {
         return $this->layoutRootPath . '/' . $this->filename;
+    }
+
+    public function isFileExists()
+    {
+        return file_exists($this->getFullPath());
     }
 }

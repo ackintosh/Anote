@@ -6,8 +6,7 @@ namespace Anote\test;
  * @package Test
  */
 
-require_once './phpunit_bootstrap.php';
-require_once '../AnoteCore.php';
+require_once realpath(__DIR__ . '/../') . '/AnoteCore.php';
 
 class AnoteCoreTest extends \PHPUnit_Framework_TestCase
 {
