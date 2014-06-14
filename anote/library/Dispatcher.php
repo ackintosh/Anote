@@ -9,7 +9,7 @@ class Dispatcher
 {
     public function __construct($get)
     {
-        $this->anote_path = (@$get['anote_path'] === null) ? 'index' : $this->_getFormattedAnotePath($get['anote_path']);
+        $this->anote_path = (@$get['anote_path'] === null) ? 'index' : $this->getFormattedAnotePath($get['anote_path']);
         $this->request = $get;
     }
 
@@ -17,8 +17,8 @@ class Dispatcher
     {
         try {
             $core = new \anote\AnoteCore($this->request);
-            $func = $this->_getCoreFunction($core);
-            $core->viewer->layout = $this->_getCoreLayout($core, $func);
+            $func = $this->getCoreFunction($core);
+            $core->viewer->layout = $this->getCoreLayout($core, $func);
             $core->$func();
             $core->viewer->render($func);
         } catch (\Exception $e) {
@@ -26,7 +26,7 @@ class Dispatcher
         }
     }
 
-    private function _getCoreFunction($core)
+    private function getCoreFunction($core)
     {
         foreach (Reflection::getMethods($core) as $method) {
             if ($this->anote_path === AnotationParser::anoteURL($method->getDocComment())) {
@@ -38,7 +38,7 @@ class Dispatcher
         return 'anote404';
     }
 
-    private function _getCoreLayout($core, $func)
+    private function getCoreLayout($core, $func)
     {
         $layoutName = AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func));
         if (empty($layoutName)) {
@@ -48,7 +48,7 @@ class Dispatcher
         }
     }
 
-    private function _getFormattedAnotePath($anote_path)
+    private function getFormattedAnotePath($anote_path)
     {
         return preg_replace(array('/^\//', '/\/$/'), '', $anote_path);
     }
