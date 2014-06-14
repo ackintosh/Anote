@@ -12,8 +12,14 @@ class Dispatcher
 {
     public function __construct($get)
     {
-        $this->anote_path = (@$get['anote_path'] === null) ? 'index' : $this->getFormattedAnotePath($get['anote_path']);
+        if (isset($get['anote_path']) && !empty($get['anote_path'])) {
+            $this->anote_path = $this->getFormattedAnotePath($get['anote_path']);
+        } else {
+            $this->anote_path = $this->getFormattedAnotePath($_SERVER['REQUEST_URI']);
+        }
         $this->get = $get;
+
+        return $this;
     }
 
     public function boot()
@@ -55,6 +61,6 @@ class Dispatcher
 
     private function getFormattedAnotePath($anote_path)
     {
-        return preg_replace(array('/^\//', '/\/$/'), '', $anote_path);
+        return preg_replace(array('#\A\/#', '#\/\z#', '#\Aindex\.php\/#'), '', $anote_path);
     }
 }
