@@ -1,5 +1,5 @@
 <?php
-namespace anote\library;
+namespace Anote\Library;
 /**
  * Request Dispatcher
  * @package Library
@@ -16,7 +16,7 @@ class Dispatcher
     public function boot()
     {
         try {
-            $core = new \anote\AnoteCore($this->request);
+            $core = new \Anote\AnoteCore($this->request);
             $func = $this->getCoreFunction($core);
             $core->viewer->layout = $this->getCoreLayout($core, $func);
             $core->$func();

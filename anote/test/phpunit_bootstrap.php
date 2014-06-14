@@ -5,9 +5,9 @@
 require_once 'PHPUnit/Autoload.php';
 
 define('ROOT', realpath(dirname(__FILE__) . '/../../') . '/');
-define('ANOTE_ROOT', ROOT . 'anote/');
+define('ANOTE_ROOT', ROOT . 'Anote/');
 define('WEB_ROOT', ROOT . 'webroot/');
 
-require_once('../library/Autoloader.php');
-$autoloader = new \anote\library\Autoloader();
+require_once('../Library/Autoloader.php');
+$autoloader = new \Anote\Library\Autoloader();
 $autoloader->register(array($autoloader, 'load'));

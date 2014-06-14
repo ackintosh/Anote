@@ -2,21 +2,21 @@
 /**
  * FrontController
  */
-use anote\library\Autoloader;
-use anote\library\ConfigManager;
-use anote\library\Dispatcher;
-use anote\library\FrontController;
-use anote\library\AnotationParser;
+use Anote\Library\Autoloader;
+use Anote\Library\ConfigManager;
+use Anote\Library\Dispatcher;
+use Anote\Library\FrontController;
+use Anote\Library\AnotationParser;
 
 define('ROOT', realpath(dirname(__FILE__) . '/../'));
-define('ANOTE_ROOT', ROOT . '/anote');
+define('ANOTE_ROOT', ROOT . '/Anote');
 define('WEB_ROOT', ROOT . '/webroot');
 
-require_once(ANOTE_ROOT . '/library/Autoloader.php');
+require_once(ANOTE_ROOT . '/Library/Autoloader.php');
 $autoloader = new Autoloader();
 $autoloader->register(array($autoloader, 'load'));
 
-require_once ANOTE_ROOT . '/library/vendor/php-activerecord/ActiveRecord.php';
+require_once ANOTE_ROOT . '/Library/vendor/php-activerecord/ActiveRecord.php';
 ActiveRecord\Config::initialize(function($cfg)
 {
     $array_connections = array();

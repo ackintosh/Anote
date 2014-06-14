@@ -1,5 +1,5 @@
 <?php
-namespace anote\test;
+namespace Anote\test;
 
 /**
  * Anote Core Test
@@ -15,9 +15,9 @@ class AnoteCoreTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->anoteCore = new \anote\AnoteCore($this->request);
-        $this->assertSame('anote\AnoteCore', get_class($this->anoteCore));
-        $this->assertSame('anote\library\Viewer', get_class($this->anoteCore->viewer));
+        $this->anoteCore = new \Anote\AnoteCore($this->request);
+        $this->assertSame('Anote\AnoteCore', get_class($this->anoteCore));
+        $this->assertSame('Anote\Library\Viewer', get_class($this->anoteCore->viewer));
     }
 
     public function testIndex()

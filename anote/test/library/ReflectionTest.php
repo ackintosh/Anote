@@ -1,5 +1,5 @@
 <?php
-namespace anote\library;
+namespace Anote\Library;
 /**
  * Reflection Test
  * @package Test

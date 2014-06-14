@@ -1,5 +1,5 @@
 <?php
-namespace anote\library;
+namespace Anote\Library;
 /**
  * Page Viewer Test
  * @package Test
@@ -13,7 +13,7 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->viewer = new Viewer();
-        $this->assertSame('anote\library\Viewer', get_class($this->viewer));
+        $this->assertSame('Anote\Library\Viewer', get_class($this->viewer));
     }
 
     /**

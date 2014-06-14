@@ -1,5 +1,5 @@
 <?php
-namespace anote;
+namespace Anote;
 
 /**
  * Anote Core
@@ -10,7 +10,7 @@ class AnoteCore
 {
     public function __construct($request)
     {
-        $this->viewer = new library\Viewer();
+        $this->viewer = new Library\Viewer();
         $this->request = $request;
     }
 

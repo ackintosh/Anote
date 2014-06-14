@@ -1,11 +1,11 @@
 <?php
-namespace anote\library;
+namespace Anote\Library;
 /**
  * Config Manager
  * @package Library
  */
 
-require_once ANOTE_ROOT . '/library/vendor/spyc/spyc.php';
+require_once ANOTE_ROOT . '/Library/vendor/spyc/spyc.php';
 class ConfigManager
 {
     private $params = array();
