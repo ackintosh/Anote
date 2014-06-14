@@ -1,19 +1,13 @@
 <?php
 namespace Anote;
-
+use Anote\Library\Core;
 /**
  * Anote Core
  * @package Core
  */
 
-class AnoteCore
+class AnoteCore extends Core
 {
-    public function __construct($request)
-    {
-        $this->viewer = new Library\Viewer();
-        $this->request = $request;
-    }
-
     /**
      * A function for TOP page
      * @anoteURL(/index)

@@ -1,5 +1,8 @@
 <?php
 namespace Anote\Library;
+use Anote\AnoteCore;
+use Anote\Library\Request\Get;
+use Anote\Library\Viewer;
 /**
  * Request Dispatcher
  * @package Library
@@ -10,13 +13,15 @@ class Dispatcher
     public function __construct($get)
     {
         $this->anote_path = (@$get['anote_path'] === null) ? 'index' : $this->getFormattedAnotePath($get['anote_path']);
-        $this->request = $get;
+        $this->get = $get;
     }
 
     public function boot()
     {
         try {
-            $core = new \Anote\AnoteCore($this->request);
+            $core = new AnoteCore();
+            $core->get = new Get($this->get);
+            $core->viewer = new Viewer;
             $func = $this->getCoreFunction($core);
             $core->viewer->layout = $this->getCoreLayout($core, $func);
             $core->$func();

@@ -15,9 +15,8 @@ class AnoteCoreTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->anoteCore = new \Anote\AnoteCore($this->request);
+        $this->anoteCore = new \Anote\AnoteCore();
         $this->assertSame('Anote\AnoteCore', get_class($this->anoteCore));
-        $this->assertSame('Anote\Library\Viewer', get_class($this->anoteCore->viewer));
     }
 
     public function testIndex()

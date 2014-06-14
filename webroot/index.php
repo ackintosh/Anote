@@ -13,7 +13,7 @@ define('ANOTE_ROOT', ROOT . '/Anote');
 define('WEB_ROOT', ROOT . '/webroot');
 
 require_once(ANOTE_ROOT . '/Library/Autoloader.php');
-$autoloader = new Autoloader();
+$autoloader = (new Autoloader())->setRootPath(ROOT);
 $autoloader->register(array($autoloader, 'load'));
 
 require_once ANOTE_ROOT . '/Library/vendor/php-activerecord/ActiveRecord.php';
