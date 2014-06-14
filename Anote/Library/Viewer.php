@@ -11,11 +11,6 @@ class Viewer
     private $layout;
     private $environment;
 
-    public function __construct()
-    {
-
-    }
-
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
@@ -37,9 +32,10 @@ class Viewer
         }
 
         $this->_content = ob_get_clean();
+        ob_start();
         if (false === @include_once($this->layout->getFullPath())) {
             throw new \InvalidArgumentException('Layout file is not found.');
         }
-        exit;
+        echo ob_get_clean();
     }
 }

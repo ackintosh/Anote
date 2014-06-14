@@ -6,7 +6,6 @@ namespace Anote\test;
  * @package Test
  */
 
-require_once './phpunit_bootstrap.php';
 require_once '../AnoteCore.php';
 
 class AnoteCoreTest extends \PHPUnit_Framework_TestCase

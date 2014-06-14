@@ -13,7 +13,7 @@ require_once(realpath(__DIR__ . '/../Anote') . '/Library/Autoloader.php');
 $autoloader = (new Autoloader())->setRootPath(realpath(__DIR__ . '/../'));
 $autoloader->register(array($autoloader, 'load'));
 
-$environment = new Environment();
+$environment = (new Environment())->setServerEnvironment($_SERVER);
 
 require_once $environment->anoteRoot . '/Library/vendor/php-activerecord/ActiveRecord.php';
 ActiveRecord\Config::initialize(function($cfg) use ($environment)

@@ -23,4 +23,10 @@ class Environment
         $this->params['anoteRoot']  = $root . '/Anote';
         $this->params['webRoot']    = $root . '/webroot';
     }
+
+    public function setServerEnvironment($server)
+    {
+        $this->params['server'] = $server;
+        return $this;
+    }
 }

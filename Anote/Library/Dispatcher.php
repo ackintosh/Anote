@@ -15,6 +15,7 @@ class Dispatcher
 {
     private $environment;
     private $get;
+    private $anote_path;
 
     public function __construct($environment, $get)
     {
@@ -24,7 +25,7 @@ class Dispatcher
         if (isset($get['anote_path']) && !empty($get['anote_path'])) {
             $this->anote_path = $this->getFormattedAnotePath($get['anote_path']);
         } else {
-            $this->anote_path = $this->getFormattedAnotePath($_SERVER['REQUEST_URI']);
+            $this->anote_path = $this->getFormattedAnotePath($environment->server['REQUEST_URI']);
         }
 
         return $this;
@@ -45,11 +46,13 @@ class Dispatcher
 
             $core->$func();
             $core->viewer->render($func);
+
         } catch (RouteNotFoundException $e) {
             header('HTTP/1.0 404 Not Found');
-            exit;
+
         } catch (\Exception $e) {
             echo $e->getMessage();
+
         }
     }
 

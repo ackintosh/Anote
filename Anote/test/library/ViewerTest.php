@@ -15,8 +15,6 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->viewer = new Viewer();
-        $this->viewer->setEnvironment(new Environment);
-        $this->assertSame('Anote\Library\Viewer', get_class($this->viewer));
     }
 
     /**
@@ -24,6 +22,7 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTemplateNotFound()
     {
+        $this->viewer->setEnvironment(new Environment);
         $this->viewer->render('template_does_not_exist');
     }
 
@@ -32,6 +31,7 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLayoutNotFound()
     {
+        $this->viewer->setEnvironment(new Environment);
         $this->viewer->setLayout(new Layout('layout_does_not_exist'));
         $this->viewer->render('index');
     }

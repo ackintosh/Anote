@@ -6,6 +6,9 @@ use Anote\Library\Core;
  * @package Core
  */
 
+/**
+ * @codeCoverageIgnore
+ */
 class AnoteCore extends Core
 {
     /**
