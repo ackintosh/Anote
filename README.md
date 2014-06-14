@@ -1,7 +1,8 @@
 #Anote  
 
-The build status of the current master branch is tracked by Travis CI:
 [![Build Status](https://secure.travis-ci.org/ackintosh/Anote.png?branch=master)](http://travis-ci.org/ackintosh/Anote)  
+[![Coverage
+Status](https://coveralls.io/repos/ackintosh/Anote/badge.png?branch=refact)](https://coveralls.io/r/ackintosh/Anote?branch=master)
 
 =====
 

@@ -7,8 +7,6 @@ use Anote\Library\Environment;
  * @package Test
  */
 
-require_once './phpunit_bootstrap.php';
-
 
 class ViewerTest extends \PHPUnit_Framework_TestCase
 {
