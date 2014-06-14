@@ -13,14 +13,19 @@ use Anote\Library\Exception\RouteNotFoundException;
 
 class Dispatcher
 {
-    public function __construct($get)
+    private $environment;
+    private $get;
+
+    public function __construct($environment, $get)
     {
+        $this->environment = $environment;
+        $this->get = $get;
+
         if (isset($get['anote_path']) && !empty($get['anote_path'])) {
             $this->anote_path = $this->getFormattedAnotePath($get['anote_path']);
         } else {
             $this->anote_path = $this->getFormattedAnotePath($_SERVER['REQUEST_URI']);
         }
-        $this->get = $get;
 
         return $this;
     }
@@ -34,8 +39,10 @@ class Dispatcher
             $func = $route->getMethodName();
 
             $core->get = new Get($this->get);
-            $core->viewer = new Viewer;
-            $core->viewer->setLayout(new Layout(AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func))));
+            $core->viewer = (new Viewer)
+                ->setEnvironment($this->environment)
+                ->setLayout(new Layout(AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func))));
+
             $core->$func();
             $core->viewer->render($func);
         } catch (RouteNotFoundException $e) {

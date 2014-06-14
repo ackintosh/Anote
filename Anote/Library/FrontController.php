@@ -7,10 +7,10 @@ namespace Anote\Library;
 
 class FrontController
 {
-    public static function act($request)
+    public static function act($environment, $request)
     {
         self::init();
-        (new Dispatcher($request))->boot();
+        (new Dispatcher($environment, $request))->boot();
     }
 
     private static function init()

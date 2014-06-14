@@ -1,6 +1,7 @@
 <?php
 namespace Anote\Library;
 use Anote\Library\Layout;
+use Anote\Library\Environment;
 /**
  * Page Viewer Test
  * @package Test
@@ -14,6 +15,7 @@ class ViewerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->viewer = new Viewer();
+        $this->viewer->setEnvironment(new Environment);
         $this->assertSame('Anote\Library\Viewer', get_class($this->viewer));
     }
 

@@ -3,30 +3,29 @@
  * FrontController
  */
 use Anote\Library\Autoloader;
+use Anote\Library\Environment;
 use Anote\Library\ConfigManager;
 use Anote\Library\Dispatcher;
 use Anote\Library\FrontController;
 use Anote\Library\AnotationParser;
 
-define('ROOT', realpath(dirname(__FILE__) . '/../'));
-define('ANOTE_ROOT', ROOT . '/Anote');
-define('WEB_ROOT', ROOT . '/webroot');
-
-require_once(ANOTE_ROOT . '/Library/Autoloader.php');
-$autoloader = (new Autoloader())->setRootPath(ROOT);
+require_once(realpath(__DIR__ . '/../Anote') . '/Library/Autoloader.php');
+$autoloader = (new Autoloader())->setRootPath(realpath(__DIR__ . '/../'));
 $autoloader->register(array($autoloader, 'load'));
 
-require_once ANOTE_ROOT . '/Library/vendor/php-activerecord/ActiveRecord.php';
-ActiveRecord\Config::initialize(function($cfg)
+$environment = new Environment();
+
+require_once $environment->anoteRoot . '/Library/vendor/php-activerecord/ActiveRecord.php';
+ActiveRecord\Config::initialize(function($cfg) use ($environment)
 {
     $array_connections = array();
     foreach (ConfigManager::getConfig('database') as $env => $cnf) {
         $array_connections[$env] = "{$cnf['dbtype']}://{$cnf['user']}:{$cnf['password']}@{$cnf['host']}/{$cnf['dbname']}";
     }
 
-    $cfg->set_model_directory(ANOTE_ROOT . '/model');
+    $cfg->set_model_directory($environment->anoteRoot . '/model');
     $cfg->set_connections($array_connections);
-    $cfg->set_default_connection('development');
+    $cfg->set_default_connection($environment->env);
 });
 
-FrontController::act($_GET);
+FrontController::act($environment, $_GET);

@@ -1,5 +1,6 @@
 <?php
 namespace Anote\Library;
+use Anote\Library\Environment;
 /**
  * Request Dispatcher Test
  * @package Test
@@ -15,7 +16,8 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase
     public function testAnotePath()
     {
         $get = array('anote_path' => 'index');
-        $dispatcher = new Dispatcher($get);
+        $environment = new Environment;
+        $dispatcher = new Dispatcher($environment, $get);
         $this->assertSame('Anote\Library\Dispatcher', get_class($dispatcher));
         $this->assertEquals('index', $dispatcher->anote_path);
     }
