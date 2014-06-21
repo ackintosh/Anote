@@ -9,6 +9,7 @@ class Environment
     public function __construct($env = 'development')
     {
         $this->params['env'] = $env;
+        $this->setServerEnvironment($_SERVER);
         $this->setPaths(realpath(__DIR__ . '/../../'));
     }
 
@@ -24,7 +25,7 @@ class Environment
         $this->params['webRoot']    = $root . '/webroot';
     }
 
-    public function setServerEnvironment($server)
+    private function setServerEnvironment($server)
     {
         $this->params['server'] = $server;
         return $this;

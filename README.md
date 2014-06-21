@@ -15,7 +15,7 @@ PHPで作ったWebアプリケーションフレームワークです。
 GPL v3  
 
 #動作環境
-PHP5.3以上  
+PHP5.4以上  
 
 #概要
 コントローラはAnoteCoreクラスだけです。
@@ -24,7 +24,7 @@ PHP5.3以上
 AnoteCore.php 
 
     /**
-     * @anoteURL(/test.html)
+     * @anoteURL(/test)
      * @anoteLayout(default)
      */
     public function hoge()
@@ -33,7 +33,7 @@ AnoteCore.php
         $this->viewer->content = 'Hello, Anote !!';
     }
 
-上記の場合、http://example.com/test.html にアクセスしたときに  
+上記の場合、http://example.com/test にアクセスしたときに  
 
 * コントローラ
 AnoteCore::hoge()  

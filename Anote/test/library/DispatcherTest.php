@@ -1,6 +1,8 @@
 <?php
 namespace Anote\Library;
 use Anote\Library\Environment;
+use Anote\Library\Request;
+use Anote\Library\Response;
 /**
  * Request Dispatcher Test
  * @package Test
@@ -8,40 +10,56 @@ use Anote\Library\Environment;
 
 class DispatcherTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected function setUp()
-    {
-        $get = array('anote_path' => 'index');
-        $environment = new Environment;
-        $this->dispatcher = new Dispatcher($environment, $get);
-    }
-
     /**
      * @test
      */
-    public function anotePath()
+    public function bootWithAnotePath()
     {
-        $this->assertEquals('index', \TestHelper::getPrivateProperty($this->dispatcher, 'anote_path'));
-    }
-
-    /**
-     * @test
-     */
-    public function constructorSetsAnotePath()
-    {
-        $env = (new Environment)->setServerEnvironment(array('REQUEST_URI' => '/index.php/test'));
-        $dispatcher = new Dispatcher($env, array());
-        $this->assertSame('test', \TestHelper::getPrivateProperty($dispatcher, 'anote_path'));
-    }
-
-    /**
-     * @test
-     */
-    public function boot()
-    {
+        $_GET['anote_path'] = 'test';
         ob_start();
-        $this->dispatcher->boot();
+        Dispatcher::boot(new Environment, new Request, new Response);
         $content = ob_get_clean();
-        $this->assertTrue(!is_null($content));
+
+        $this->assertTrue(strpos($content, 'my test') !== false);
+    }
+
+    /**
+     * @test
+     */
+    public function bootWithoutAnotepath()
+    {
+        $_SERVER['REQUEST_URI'] = '/index.php/test';
+        ob_start();
+        Dispatcher::boot(new Environment, new Request, new Response);
+        $content = ob_get_clean();
+
+        $this->assertTrue(strpos($content, 'my test') !== false);
+    }
+
+    /**
+     * @test
+     */
+    public function getFormattedAnotePath()
+    {
+        $result = \TestHelper::invokePrivateStaticMethod(
+            'Anote\Library\Dispatcher',
+            'getFormattedAnotePath',
+            array('/index.php/test')
+        );
+
+        $this->assertSame('test', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function bootReturns404WhenRouteNotFound()
+    {
+        $_GET['anote_path'] = 'unknown path';
+        $response = $this->getMock('Anote\Library\Response');
+        $response->expects($this->once())
+            ->method('notFound');
+
+        Dispatcher::boot(new Environment, new Request, $response);
     }
 }
