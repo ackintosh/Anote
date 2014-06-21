@@ -13,7 +13,7 @@ use Anote\Library\Exception\RouteNotFoundException;
 
 class Dispatcher
 {
-    public static function boot($environment, $request)
+    public static function boot($environment, $request, $response)
     {
         try {
             if ($request->get->anote_path !== null) {
@@ -22,7 +22,7 @@ class Dispatcher
                 $anote_path = self::getFormattedAnotePath($environment->server['REQUEST_URI']);
             }
 
-            $core = new AnoteCore();
+            $core = new AnoteCore;
             $routingTable = new RoutingTable($core);
             $route = $routingTable->getRoute($anote_path);
             $func = $route->getMethodName();
@@ -35,7 +35,7 @@ class Dispatcher
             $core->$func();
             echo $core->viewer->render($func);
         } catch (RouteNotFoundException $e) {
-            header('HTTP/1.0 404 Not Found');
+            $response->notFound();
         }
     }
 
