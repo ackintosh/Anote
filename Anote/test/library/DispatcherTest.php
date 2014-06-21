@@ -18,7 +18,8 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase
         ob_start();
         Dispatcher::boot(new Environment, new Request);
         $content = ob_get_clean();
-        $this->assertTrue(!is_null($content));
+
+        $this->assertTrue(strpos($content, 'my test') !== false);
     }
 
     /**
@@ -31,7 +32,7 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase
         Dispatcher::boot(new Environment, new Request);
         $content = ob_get_clean();
 
-        $this->assertTrue(!is_null($content));
+        $this->assertTrue(strpos($content, 'my test') !== false);
     }
 
     /**

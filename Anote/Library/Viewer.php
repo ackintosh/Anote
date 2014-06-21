@@ -27,15 +27,17 @@ class Viewer
     public function render($templateName)
     {
         ob_start();
-        if(false === @include_once($this->environment->anoteRoot . '/view/' . $templateName . '.php')) {
+        if(false === @include($this->environment->anoteRoot . '/view/' . $templateName . '.php')) {
+            ob_end_clean();
             throw new \InvalidArgumentException('Template file is not found.');
         }
 
         $this->_content = ob_get_clean();
         ob_start();
-        if (false === @include_once($this->layout->getFullPath())) {
+        if (false === @include($this->layout->getFullPath())) {
+            ob_end_clean();
             throw new \InvalidArgumentException('Layout file is not found.');
         }
-        echo ob_get_clean();
+        return ob_get_clean();
     }
 }

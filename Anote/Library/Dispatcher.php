@@ -33,11 +33,9 @@ class Dispatcher
                 ->setLayout(new Layout(AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func))));
 
             $core->$func();
-            $core->viewer->render($func);
-
+            echo $core->viewer->render($func);
         } catch (RouteNotFoundException $e) {
             header('HTTP/1.0 404 Not Found');
-
         }
     }
 

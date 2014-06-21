@@ -33,6 +33,17 @@ class GetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function getterReturnsNullWhenPassedUnknownKey()
+    {
+        $values = array('key1' => 'value1', 'key2' => 'value2');
+        $get = new Get($values);
+
+        $this->assertNull($get->test);
+    }
+
+    /**
+     * @test
      * @expectedException \Anote\Library\Exception\ChangingRequestException
      */
     public function setterThrowsException()
