@@ -1,5 +1,8 @@
 <?php
 namespace Anote\Library;
+use Anote\Library\Dispatcher;
+use Anote\Library\Request;
+
 /**
  * FrontController
  * @package Library
@@ -7,10 +10,10 @@ namespace Anote\Library;
 
 class FrontController
 {
-    public static function act($environment, $request)
+    public static function run($environment)
     {
         self::init();
-        (new Dispatcher($environment, $request))->boot();
+        Dispatcher::boot($environment, new Request);
     }
 
     private static function init()

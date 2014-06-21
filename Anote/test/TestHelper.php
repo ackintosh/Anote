@@ -10,4 +10,11 @@ class TestHelper
 
         return $property->getValue($object);
     }
+
+    public static function invokePrivateStaticMethod($className, $methodName, Array $args)
+    {
+        $ref = new \ReflectionMethod($className, $methodName);
+        $ref->setAccessible(true);
+        return $ref->invokeArgs(null, $args);
+    }
 }

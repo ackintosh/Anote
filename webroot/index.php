@@ -13,7 +13,7 @@ require_once(realpath(__DIR__ . '/../Anote') . '/Library/Autoloader.php');
 $autoloader = (new Autoloader())->setRootPath(realpath(__DIR__ . '/../'));
 $autoloader->register(array($autoloader, 'load'));
 
-$environment = (new Environment())->setServerEnvironment($_SERVER);
+$environment = new Environment();
 
 require_once $environment->anoteRoot . '/Library/vendor/php-activerecord/ActiveRecord.php';
 ActiveRecord\Config::initialize(function($cfg) use ($environment)
@@ -28,4 +28,4 @@ ActiveRecord\Config::initialize(function($cfg) use ($environment)
     $cfg->set_default_connection($environment->env);
 });
 
-FrontController::act($environment, $_GET);
+FrontController::run($environment);

@@ -8,7 +8,7 @@ use Anote\Library\Exception\ChangingRequestException;
 
 class Get
 {
-    private $values = array();
+    private $values;
 
     public function __construct($get)
     {
@@ -17,7 +17,11 @@ class Get
 
     public function __get($key)
     {
-        return $this->values[$key];
+        if (isset($this->values[$key])) {
+            return $this->values[$key];
+        }
+
+        return null;
     }
 
     public function __set($key, $value)

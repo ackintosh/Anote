@@ -13,35 +13,23 @@ use Anote\Library\Exception\RouteNotFoundException;
 
 class Dispatcher
 {
-    private $environment;
-    private $get;
-    private $anote_path;
-
-    public function __construct($environment, $get)
-    {
-        $this->environment = $environment;
-        $this->get = $get;
-
-        if (isset($get['anote_path']) && !empty($get['anote_path'])) {
-            $this->anote_path = $this->getFormattedAnotePath($get['anote_path']);
-        } else {
-            $this->anote_path = $this->getFormattedAnotePath($environment->server['REQUEST_URI']);
-        }
-
-        return $this;
-    }
-
-    public function boot()
+    public static function boot($environment, $request)
     {
         try {
+            if ($request->get->anote_path !== null) {
+                $anote_path = self::getFormattedAnotePath($request->get->anote_path);
+            } else {
+                $anote_path = self::getFormattedAnotePath($environment->server['REQUEST_URI']);
+            }
+
             $core = new AnoteCore();
             $routingTable = new RoutingTable($core);
-            $route = $routingTable->getRoute($this->anote_path);
+            $route = $routingTable->getRoute($anote_path);
             $func = $route->getMethodName();
 
-            $core->get = new Get($this->get);
+            $core->request = $request;
             $core->viewer = (new Viewer)
-                ->setEnvironment($this->environment)
+                ->setEnvironment($environment)
                 ->setLayout(new Layout(AnotationParser::anoteLayout(Reflection::getMethodComment($core, $func))));
 
             $core->$func();
@@ -50,13 +38,10 @@ class Dispatcher
         } catch (RouteNotFoundException $e) {
             header('HTTP/1.0 404 Not Found');
 
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-
         }
     }
 
-    private function getFormattedAnotePath($anote_path)
+    private static function getFormattedAnotePath($anote_path)
     {
         return preg_replace(array('#\A\/#', '#\/\z#', '#\Aindex\.php\/#'), '', $anote_path);
     }
